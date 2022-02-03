@@ -1,0 +1,32 @@
+
+service: pincode
+# app and org for use with dashboard.serverless.com
+#app: your-app-name
+#org: your-org-name
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+
+functions:
+  pinCodeCheck:
+    handler: handler.pinCodeCheck
+    events:
+      - httpApi:
+          path: /pincode-check
+          method: get
+  uploadCsv:
+    handler: handler.uploadCsv
+    events:
+      - httpApi:
+          path: /upload
+          method: post
+
+
+plugins:
+  - serverless-offline
